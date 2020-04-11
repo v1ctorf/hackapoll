@@ -5,6 +5,7 @@ COUNTRIES="${COUNTRIES} NL NL-FREE NZ NO PL PT RO RU RS SG SK ZA ES SE CH TW TR 
 COUNTRIES="${COUNTRIES} US-GA US-IL US-NJ US-NY US-TX US-UT US-VA US-GA"
 
 #sudo protonvpn init
+#sudo bash hackapoll.sh
 
 printf "\nenter uri:\n"
 read URI
