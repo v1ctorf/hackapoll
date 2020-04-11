@@ -6,27 +6,26 @@ COUNTRIES="${COUNTRIES} US-NY US-TX US-UT US-VA US-GA"
 
 #sudo protonvpn init
 
-echo "enter uri:"
+printf "\nenter uri:\n"
 read URI
-# https://vidadestra.org/wp-admin/admin-ajax.php
 
-echo "enter params:"
+printf "\nenter params:\n"
 read PARAMS
-# action=polls&view=process&poll_id=6&poll_6=18&poll_6_nonce=2e73782227
 
 for run in $COUNTRIES
 do
     for svr in {1..120}
     do
-        sudo protonvpn status;
-        echo "trying server $run#$svr..."
+        printf "\ntrying server $run#$svr...\n"
 
         if sudo protonvpn c "$run#$svr" -p tcp | grep "Connected!"
         then
-            curl -d "${PARAMS}" "${URI}";
-            sudo protonvpn disconnect;
+            printf "\nsending POST request...\n"
+            curl -d "${PARAMS}" "${URI}"
+            printf "\ndisconnecting...\n"
+            sudo protonvpn disconnect
         else
-            echo "connection server $run#$svr failed or does not exist."
+            printf "\nconnection server $run#$svr failed or does not exist.\n"
         fi
 
     done
