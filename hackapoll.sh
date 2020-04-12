@@ -9,14 +9,14 @@ loop_server_list()
 
     for run in $LCOUNTRIES
     do
-        for (( svr=2; svr <= $LMAXSVR; ++svr ))
+        for (( svr=1; svr <= $LMAXSVR; ++svr ))
         do
             printf "\ntrying server $run#$svr... "
 
             if sudo protonvpn c "$run#$svr" -p tcp | grep "Connected!"
             then
                 printf "\nsending POST request...\n"
-                curl -d "${LPARAMS}" "${LURI}"
+                curl -d "${LPARAMS}" "${LURI}" -m 30.0
                 printf "\ndisconnecting...\n"
                 sudo protonvpn disconnect
             else
