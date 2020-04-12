@@ -1,11 +1,16 @@
 #!/bin/sh
 
+get_params()
+{
+    echo $(head -n 1 params)
+}
+
 loop_server_list()
 {
     LCOUNTRIES=$1
     LMAXSVR=$2
     LURI=$3
-    LPARAMS=$(head -n 1 params)
+    LPARAMS=$(get_params)
 
     for run in $LCOUNTRIES
     do
