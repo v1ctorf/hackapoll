@@ -16,7 +16,7 @@ loop_server_list()
             if sudo protonvpn c "$run#$svr" -p tcp | grep "Connected!"
             then
                 printf "\nsending POST request...\n"
-                curl -d "${LPARAMS}" "${LURI}" -m 30.0
+                curl -d "${LPARAMS}" "${LURI}" -m 30.0 --connect-timeout 30.0
                 printf "\ndisconnecting...\n"
                 sudo protonvpn disconnect
             else
