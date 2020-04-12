@@ -22,7 +22,13 @@ loop_server_list()
             if sudo protonvpn c "$run#$svr" -p tcp | grep "Connected!"
             then
                 LPARAMS=$(get_params)
-                FILELINE=$(($FILELINE+1))
+                if [ ! "$LPARAMS" ]
+                then
+                    FILELINE=1
+                    LPARAMS=$(get_params)
+                else
+                    FILELINE=$(($FILELINE+1))
+                fi
                 printf "\nsending POST request with params:\n=> ${LPARAMS}\n"
                 curl -d "${LPARAMS}" "${LURI}" -m 30.0 --connect-timeout 30.0
                 printf "\ndisconnecting...\n"
