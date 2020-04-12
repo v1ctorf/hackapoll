@@ -5,7 +5,7 @@ loop_server_list()
     LCOUNTRIES=$1
     LMAXSVR=$2
     LURI=$3
-    LPARAMS=$4
+    LPARAMS=$(head -n 1 params)
 
     for run in $LCOUNTRIES
     do
@@ -15,7 +15,7 @@ loop_server_list()
 
             if sudo protonvpn c "$run#$svr" -p tcp | grep "Connected!"
             then
-                printf "\nsending POST request...\n"
+                printf "\nsending POST request with params:\n=> ${LPARAMS}\n"
                 curl -d "${LPARAMS}" "${LURI}" -m 30.0 --connect-timeout 30.0
                 printf "\ndisconnecting...\n"
                 sudo protonvpn disconnect
@@ -31,14 +31,8 @@ COUNTRIES="AR AU AT BE BR BG BF CA CZ CR DK EE FI FR DE GR HK IS IN IE IL IT JP 
 COUNTRIES="${COUNTRIES} NL-FREE NZ NO PL PT RO RU RS SG SK ZA ES SE CH TW TR UA AE UK US-FREE"
 COUNTRIES_XL="NL US-CA US-FL US-GA US-IL US-NJ US-NY US-TX US-UT US-VA US-GA"
 
-#sudo protonvpn init
-#sudo bash hackapoll.sh
-
 printf "\nenter endpoint:\n"
 read URI
 
-printf "\nenter params:\n"
-read PARAMS
-
-loop_server_list "${COUNTRIES_XL}" 150 "${URI}" "${PARAMS}"
-loop_server_list "${COUNTRIES}" 40 "${URI}" "${PARAMS}"
+loop_server_list "${COUNTRIES_XL}" 150 "${URI}"
+loop_server_list "${COUNTRIES}" 40 "${URI}"
