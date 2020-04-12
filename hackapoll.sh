@@ -11,7 +11,7 @@ loop_server_list()
     do
         for (( svr=2; svr <= $LMAXSVR; ++svr ))
         do
-            printf "\ntrying server $run#$svr..."
+            printf "\ntrying server $run#$svr... "
 
             if sudo protonvpn c "$run#$svr" -p tcp | grep "Connected!"
             then
@@ -28,8 +28,8 @@ loop_server_list()
 }
 
 COUNTRIES="AR AU AT BE BR BG BF CA CZ CR DK EE FI FR DE GR HK IS IN IE IL IT JP JP-FREE KR LV LT LU MD MX"
-COUNTRIES="${COUNTRIES} NL NL-FREE NZ NO PL PT RO RU RS SG SK ZA ES SE CH TW TR UA AE UK US-FREE US-CA US-FL"
-COUNTRIES="${COUNTRIES} US-GA US-IL US-NJ US-NY US-TX US-UT US-VA US-GA"
+COUNTRIES="${COUNTRIES} NL-FREE NZ NO PL PT RO RU RS SG SK ZA ES SE CH TW TR UA AE UK US-FREE"
+COUNTRIES_XL="NL US-CA US-FL US-GA US-IL US-NJ US-NY US-TX US-UT US-VA US-GA"
 
 #sudo protonvpn init
 #sudo bash hackapoll.sh
@@ -40,6 +40,5 @@ read URI
 printf "\nenter params:\n"
 read PARAMS
 
-MAXSVR=120
-
-loop_server_list "${COUNTRIES}" $MAXSVR "${URI}" "${PARAMS}"
+loop_server_list "${COUNTRIES_XL}" 150 "${URI}" "${PARAMS}"
+loop_server_list "${COUNTRIES}" 40 "${URI}" "${PARAMS}"
