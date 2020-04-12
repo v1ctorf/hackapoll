@@ -34,7 +34,7 @@ COUNTRIES_XL="NL US-CA US-FL US-GA US-IL US-NJ US-NY US-TX US-UT US-VA US-GA"
 #sudo protonvpn init
 #sudo bash hackapoll.sh
 
-printf "\nenter uri:\n"
+printf "\nenter endpoint:\n"
 read URI
 
 printf "\nenter params:\n"
