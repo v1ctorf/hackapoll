@@ -48,5 +48,5 @@ COUNTRIES_XL="NL US-CA US-FL US-GA US-IL US-NJ US-NY US-TX US-UT US-VA US-GA"
 printf "\nenter endpoint:\n"
 read URI
 
-loop_server_list "${COUNTRIES}" 40 "${URI}"
 loop_server_list "${COUNTRIES_XL}" 150 "${URI}"
+loop_server_list "${COUNTRIES}" 40 "${URI}"
